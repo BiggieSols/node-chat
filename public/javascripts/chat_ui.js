@@ -25,6 +25,9 @@ $(function (){
     event.preventDefault();
     var message = getInput();
     sendMessage(message);
-    displayMessage(message);
   })
+});
+
+socket.on('message', function(data){
+  displayMessage(data);
 })

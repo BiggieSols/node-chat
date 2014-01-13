@@ -6,6 +6,6 @@
   }
 
   Chat.prototype.sendMessage = function(message) {
-    this.socket.emit(message);
+    this.socket.emit('message', message);
   }
 })(this)
