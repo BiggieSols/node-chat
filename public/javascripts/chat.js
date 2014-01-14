@@ -31,6 +31,7 @@
       this.socket.emit('joinRoom', param);
       break;
     default:
+      console.log("default");
       this.socket.emit('errorMessage', "Not a valid command");
     }
   }

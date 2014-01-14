@@ -22,6 +22,10 @@ var changeNickname = function(nickName) {
   $('#nickname').text(nickName)
 }
 
+var displayRoomMembers = function(members) {
+  $('#roomMembers').text(members);
+}
+
 $(function (){
   $("form").on("submit", function(event) {
     console.log(event);
@@ -34,6 +38,10 @@ $(function (){
   socket.on('message', function(data){
     displayMessage(data);
   });
+
+  socket.on('loadRoom', function(data) {
+    displayRoomMembers(data);
+  })
 
   socket.on("nicknameChangeRequest", function(data) {
     changeNickname(data);
