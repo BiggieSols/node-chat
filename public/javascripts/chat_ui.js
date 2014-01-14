@@ -6,16 +6,20 @@ var getInput = function() {
   var message = $('#message').val();
   $('#message').val("");
   return message;
-
 };
 
 var sendMessage = function(message) {
-  chat.sendMessage(message);
+  var data = $('#nickname').text() + ": " + message
+  chat.sendMessage(data);
 };
 
 var displayMessage = function(message) {
   // alert(message);
   $('#chatRoom').prepend("<div>"+message+"</div>");
+}
+
+var changeNickname = function(nickName) {
+  $('#nickname').text(nickName)
 }
 
 $(function (){
@@ -26,8 +30,13 @@ $(function (){
     var message = getInput();
     sendMessage(message);
   })
+
+  socket.on('message', function(data){
+    displayMessage(data);
+  });
+
+  socket.on("nicknameChangeRequest", function(data) {
+    changeNickname(data);
+  });
 });
 
-socket.on('message', function(data){
-  displayMessage(data);
-})
